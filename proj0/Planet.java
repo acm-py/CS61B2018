@@ -35,7 +35,7 @@ public class Planet {
         return SQR(Distance);
     }
     // return sqrt(double a)
-    public static double SQR(double a) {
+    private static double SQR(double a) {
         double x1 = 1, x2;
         x2 = x1 / 2.0 + a / (2 * x1);
         while (Math.abs(x2 - x1) > 1e-4) {
