@@ -103,7 +103,7 @@ public class ArrayDeque<T>{
         size++;
     }
 
-    public T removeFirst(T item) {
+    public T removeFirst() {
         // 此时的利用率在25%以下，需要缩容
         if (length >= 16 && length / size >= 4) {
             shrink();
@@ -117,7 +117,7 @@ public class ArrayDeque<T>{
         return result;
     }
 
-    public T removeLast(T item) {
+    public T removeLast() {
         // 此时的利用率在25%以下，需要缩容
         if (length >= 16 && length / size >= 4) {
             shrink();

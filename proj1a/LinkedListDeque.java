@@ -98,12 +98,13 @@ public class LinkedListDeque<T>{
         return result;
     }
 
+    // 迭代get
     public T get(int index) {
         if (index >= size) {
             return null;
         }
         Node pre = sentinel;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i <= index; i++) {
             pre = pre.next;
         }
         return pre.item;
