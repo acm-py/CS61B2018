@@ -79,20 +79,48 @@ public class IntList {
      * Returns a list consisting of the elements of A followed by the
      * *  elements of B.  May modify items of A. Don't use 'new'.
      */
-
+    // 因为是链表， 这个要求的是A链接B，然后在返回A
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if(B == null) {
+            return A;
+        }
+        IntList ptr = A;
+        while(ptr.rest != null){
+            ptr = ptr.rest;
+        }
+        // 上面走完后，ptr.rest == null，此时A走到最后一步了。
+        // 此时仅需要链接A的最后一个和B的第一个
+        ptr.rest = B;
+        return ptr;
     }
 
     /**
      * Returns a list consisting of the elements of A followed by the
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
+    // 这个和上面不同的就是创建新的指针，重新串起A和B
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        IntList ptr = new IntList(A.first, A.rest);
+        IntList ptrA = A.rest;
+        while (ptrA.rest != null) {
+            ptr.rest = ptrA.rest;
+            ptrA = ptrA.rest;
+        }
+        // 上面运行完后，ptr.rest == null 是A的最后一个元素
+        ptr.rest = B;
+        return ptr;
+        // 上面的递归写法
+//        if(A == null){
+//            return B;
+//        }
+//        if(A.rest == null){
+//            return new IntList(A.first, B);
+//        }
+//        return new IntList(A.first, catenate(A.rest, B));
     }
+
 
 
 

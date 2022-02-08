@@ -125,10 +125,9 @@ public class ArrayDeque<T>{
         if (size == 0) {
             return null;
         }
-        T result = array[last];
         last = minusOne(last);
         size --;
-        return result;
+        return array[last];
     }
 
     public T get(int index) {
