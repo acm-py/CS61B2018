@@ -65,7 +65,7 @@ public class LinkedListDeque<T>{
 
     public void printDeque() {
         Node cur = sentinel.next;
-        while (cur != null) {
+        while (cur != sentinel) {
             System.out.print(cur.item + "->");
             cur = cur.next;
         }

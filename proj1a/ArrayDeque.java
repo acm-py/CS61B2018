@@ -48,7 +48,7 @@ public class ArrayDeque<T>{
         int ptr1 = front;
         // 原数组最大长度，同时也是新数组头索引（因为front = last = len/2，此时的len是原来的2倍)
         int ptr2 = length;
-        while (ptr1 != ptr2) {
+        while (ptr1 != last) {
             newArray[ptr2] = array[ptr1];
             ptr1 = plusOne(ptr1, length);
             ptr2 = plusOne(ptr2, length*2);
@@ -66,7 +66,7 @@ public class ArrayDeque<T>{
         int ptr1 = front;
         // 原数组最大长度，同时也是新数组头索引（因为front = last = len/2，此时的len是原来的二分之一)
         int ptr2 = length/4;
-        while (ptr1 != ptr2) {
+        while (ptr1 != last) {
             newArray[ptr2] = array[ptr1];
             ptr1 = plusOne(ptr1, length);
             ptr2 = plusOne(ptr2, length / 2);
@@ -98,8 +98,8 @@ public class ArrayDeque<T>{
         if (size == length - 1) {
             grow();
         }
-        last = plusOne(last, length);
         array[last] = item;
+        last = plusOne(last, length);
         size++;
     }
 
