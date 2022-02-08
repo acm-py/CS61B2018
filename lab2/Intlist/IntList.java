@@ -89,10 +89,10 @@ public class IntList {
         while(ptr.rest != null){
             ptr = ptr.rest;
         }
-        // 上面走完后，ptr.rest == null，此时A走到最后一步了。
+        // 上面走完后，ptr.rest == null，该元素是A的最后一个元素
         // 此时仅需要链接A的最后一个和B的第一个
         ptr.rest = B;
-        return ptr;
+        return A; // 不可以返回ptr, 因为此时ptr仅有A的最后一个元素和B的全部元素
     }
 
     /**
@@ -102,15 +102,51 @@ public class IntList {
     // 这个和上面不同的就是创建新的指针，重新串起A和B
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        IntList ptr = new IntList(A.first, A.rest);
-        IntList ptrA = A.rest;
-        while (ptrA.rest != null) {
-            ptr.rest = ptrA.rest;
-            ptrA = ptrA.rest;
+        //TODO: 错误版本
+//        if(A==null){
+//            return B;
+//        }
+//        if(A.rest==null) {
+//            return new IntList(A.first, B);
+//        }
+//        // 这样写还是不行，ptr 其实就是A，还是改变了A,
+//        // 应该在每个节点都new一个新的出来，然后在串起来
+////        IntList ptr = new IntList(A.first, A.rest);
+//        IntList ptr = new IntList(A.first, null);
+//        IntList temp = A;
+//        while (temp.rest != null) {
+//            temp=temp.rest;
+//            IntList node = new IntList(temp.first, null);
+//            ptr.rest = node;
+//        }
+//        // 上面运行完后，temp.rest == null 是A的最后一个元素 这样写改变了A
+//        ptr.rest = B;
+        //TODO: 重写一版
+        if (A == null) {
+            return B;
         }
-        // 上面运行完后，ptr.rest == null 是A的最后一个元素
-        ptr.rest = B;
+        if (A.rest == null) {
+            return new IntList(A.first, null);
+        }
+        IntList ptr = new IntList(A.first, null);
+        IntList temp = ptr;
+        IntList temp2 = A.rest;
+        IntList temp3 = B;
+        // 接下来就是分别遍历A，B，new出新节点再串到ptr上
+        // while 循环中不能是 tmep.rest != null 这样，跳出循环时,temp2.rest == null, temp2.first无法获取
+        while (temp2 != null) {
+            temp.rest = new IntList(temp2.first, null);
+            temp2 = temp2.rest;
+            temp = temp.rest;
+        }
+        // B
+        while (temp3 != null) {
+            temp.rest = new IntList(temp3.first, null);
+            temp3 = temp3.rest;
+            temp = temp.rest;
+        }
         return ptr;
+//        return ptr;
         // 上面的递归写法
 //        if(A == null){
 //            return B;
